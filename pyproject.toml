@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py2edg"
+version = "0.1.1"
+description = "One-line edge deployment for CV models — convert, quantize, benchmark, and ship to any device."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Mouissat Rabah Abderrahmane", email = "mouissatrabah@gmail.com"},
+]
+keywords = [
+    "edge-deployment", "onnx", "tflite", "openvino", "quantization",
+    "model-optimization", "computer-vision", "edge-ai", "raspberry-pi",
+    "jetson", "orange-pi", "benchmarking", "model-compression",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.21.0",
+    "onnx>=1.14.0",
+    "onnxruntime>=1.15.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+torch = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+]
+tflite = [
+    "tensorflow>=2.13.0",
+    "flatbuffers>=23.0",
+]
+openvino = [
+    "openvino>=2023.1",
+]
+full = [
+    "py2edg[torch,tflite,openvino]",
+    "onnxsim>=0.4.0",
+    "onnxoptimizer>=0.3.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Rahimdzx/py2edg"
+Documentation = "https://github.com/Rahimdzx/py2edg#readme"
+Repository = "https://github.com/Rahimdzx/py2edg"
+Issues = "https://github.com/Rahimdzx/py2edg/issues"
+
+[project.scripts]
+py2edg = "py2edg.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["py2edg*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
